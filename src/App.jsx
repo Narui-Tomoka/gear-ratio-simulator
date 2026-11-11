@@ -1,7 +1,12 @@
+import "./App.css";
 import { useState } from "react";
 import { vehicles } from "./data/vehicles";
 import { calculateTire } from "./utils/calculateTire";
 import { calculateRpm } from "./utils/calculateRpm";
+
+import SpeedControl from "./components/SpeedControl";
+import GearControl from "./components/GearControl";
+import NormalMeter from "./components/NormalMeter";
 
 function App() {
   const vehicle = vehicles[0];
@@ -11,6 +16,7 @@ function App() {
   const [selectedGear, setSelectedGear] = useState(3);
 
   const gearRatio = vehicle.gears[selectedGear - 1];
+
   const rpm = calculateRpm(
             speed,
             gearRatio,
@@ -19,78 +25,35 @@ function App() {
           );
 
   return (
-    <main>
-      <h1>Gear Ratio Simulator</h1>
+    <main className="app">
+      <header className="app-header">
+        <h1>Gear Ratio Simulator</h1>
 
-      <h2>{vehicle.manufacturer} {vehicle.name}</h2>
-      <p>{vehicle.grade} / {vehicle.transmisson}</p>
+        <p>{vehicle.manufacturer} {vehicle.name}</p>
+        <p>{vehicle.grade} / {vehicle.transmisson}</p>
+      </header>
 
-      <div>
-        <h3>走行速度</h3>
+      <NormalMeter
+        speed={speed}
+        setSpeed={setSpeed}
+        rpm={rpm}
+        selectedGear={selectedGear}
+      />
 
-        <input type="number"
-        min="0"
-        max="180"
-        step="1"
-        value={speed}
-        onChange={(e) => {
-          const value = Number(e.target.value);
-          if (Number.isInteger(value) && value >= 0 && value <= 180) {
-            setSpeed(value);
-          }
-        }}
-        aria-label="走行速度を入力"
-        />
+      <SpeedControl
+        speed={speed}
+        setSpeed={setSpeed}
+      />
 
-        <span> km/h</span>
+      <GearControl
+        gears={vehicle.gears}
+        selectedGear={selectedGear}
+        setSelectedGear={setSelectedGear}
+      />
 
-        <input
-          type="range"
-          min="0"
-          max="180"
-          step="1"
-          value={speed}
-          onChange={(e) => setSpeed(Number(e.target.value))}
-          aria-label="走行速度をスライダーで変更"
-         />
-      </div>
-
-      <button
-        type="button"
-        onClick={() => setSpeed((prev) => Math.max(0, prev - 1))}
-        disabled={speed <= 0}
-        >
-          -1
-        </button>
-
-      <button
-        type="button"
-        onClick={() => setSpeed((prev) => Math.min(180, prev + 1))}
-        disabled={speed >= 180}
-      >
-        +1
-      </button>
-
-      <div>
-        <h3>ギア選択</h3>
-
-        {vehicle.gears.map((_, index) => (
-          <button
-            key={index}
-            type="button"
-            onClick={() => setSelectedGear(index + 1)}
-            aria-pressed={selectedGear === index + 1}
-          >
-            {index + 1}速
-          </button>
-        ))}
-      </div>
-
-      <div>
-        <h3>エンジン回転数</h3>
-        <p>{Math.round(rpm)} rpm</p>
-      </div>
-
+      <p className="calculation-note">
+        ※ エンジン回転数はタイヤの理論外周から算出した参考値です。
+      </p>
     </main>
   )
 }
