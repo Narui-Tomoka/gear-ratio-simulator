@@ -1,0 +1,25 @@
+@use "../foundation/" as f;
+
+.gear-control {
+    max-width: 600px;
+    margin: 0 auto 2.4rem;
+
+    p {
+        margin-bottom: 1.2rem;
+    }
+
+    .gear-buttons {
+        display: flex;
+        gap: 8px;
+
+        button {
+            flex: 1;
+            min-width: 0;
+
+            &:active {
+                background: #aa3045;
+                border-color: #f07180;
+            }
+        }
+    }
+}

@@ -1,0 +1,21 @@
+@use "../foundation/" as f;
+
+.speed-buttons button,
+.gear-buttons button {
+    padding: 1.2rem;
+    background: f.$bg-button;
+    color: white;
+    border: 1px solid f.$border-color;
+    border-radius: f.$radius-button;
+    cursor: pointer;
+}
+
+@media (max-width: 480px) {
+    .gear-buttons {
+        gap: 4px;
+
+        button {
+            padding: 1rem 0.2rem;
+        }
+    }
+}

@@ -1,0 +1,63 @@
+@use "../foundation/" as f;
+
+.normal-meter {
+    position: relative;
+    width: 100%;
+    max-width: 60rem;
+    margin: 0 auto 3rem;
+    background: f.$bg-meter;
+    border: 1px solid #353c47;
+    border-radius: f.$radius-main;
+
+    @include f.mq(sm) {
+        border-radius: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .meter-svg {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .meter-speed {
+        position: absolute;
+        top: 56%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .speed-input {
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        gap: 6px;
+
+        input  {
+            width: 10rem;
+            padding: 0;
+            border: none;
+            border-bottom: 1px solid transparent;
+            background: transparent;
+            color: #fff;
+            font-size: clamp(2.5rem, 5vw, 3.8rem);
+            font-weight: bold;
+            text-align: center;
+            outline: none;
+
+            &:focus {
+                border-bottom-color: f.$accent-red;
+            }
+
+            @include f.mq(sm) {
+                width: 7rem;
+                font-size: 2.6rem;
+            }
+        }
+
+        span {
+            font-size: 13px;
+            color: #c7cdb2;
+        }
+    }
+}

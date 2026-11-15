@@ -1,0 +1,31 @@
+@use "../foundation/" as f;
+
+.speed-control {
+    max-width: 60rem;
+    margin: 0 auto 2.4rem;
+
+    label {
+        display: block;
+        margin-bottom: 1.2rem;
+    }
+
+    input[type="range"] {
+        display: block;
+        width: 100%;
+        margin-bottom: 1.6rem;
+        accent-color: f.$accent-red;
+    }
+
+    .speed-buttons {
+        display: flex;
+        gap: 1.2rem;
+
+        button {
+            flex: 1;
+
+            &:disabled {
+                opacity: 0.4;
+            }
+        }
+    }
+}

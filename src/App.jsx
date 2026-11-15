@@ -1,4 +1,3 @@
-import "./App.css";
 import { useState } from "react";
 import { vehicles } from "./data/vehicles";
 import { calculateTire } from "./utils/calculateTire";
